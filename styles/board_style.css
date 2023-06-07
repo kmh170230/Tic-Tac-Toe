@@ -1,6 +1,14 @@
 .grid {
     display: grid;
-    width: 500px;
-    margin: auto;
     justify-content: center;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.cell {
+    width: 75px;
+    height: 75px;
+    font-size: xx-large;
 }
