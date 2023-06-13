@@ -9,6 +9,7 @@ let grid = [
 
 const gameHeading = document.getElementById("gameHeading");
 const cellClick = document.querySelectorAll(".cell");
+const playAgainClick = document.getElementById("playAgain");
 
 // function for clicking cell
 cellClick.forEach((item, index) => {
@@ -18,11 +19,13 @@ cellClick.forEach((item, index) => {
         console.log(r + ',' + c);
         if (player1) {
             this.textContent = 'X';
+            this.disabled = true;
             grid[r][c] = 'X';
             gameHeading.textContent = "Player 2's turn!";
         }
         else {
             this.textContent = 'O';
+            this.disabled = true;
             grid[r][c] = 'O';
             gameHeading.textContent = "Player 1's turn!";
         }
@@ -103,7 +106,7 @@ function highlightWinner(winningCells) {
         console.log(winningIndex);
         cellClick.forEach((cell, j) => {
             if (winningIndex == j) {
-                cell.textContent = 'g';
+                
             }
         })
     }
@@ -113,3 +116,8 @@ function highlightWinner(winningCells) {
 function endGame() {
     window.location.href = "../content/winner.html";
 }
+
+// play again
+playAgainClick.addEventListener('click', function() {
+    window.location.href = "../content/board.html";
+});
