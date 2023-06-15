@@ -16,7 +16,7 @@ cellClick.forEach((item, index) => {
     item.addEventListener('click', function() {
         let r = Math.floor(index / 3);
         let c = index % 3;
-        console.log(r + ',' + c);
+
         if (player1) {
             this.textContent = 'X';
             this.disabled = true;
@@ -29,8 +29,8 @@ cellClick.forEach((item, index) => {
             grid[r][c] = 'O';
             gameHeading.textContent = "Player 1's turn!";
         }
-        console.log('click');
-        if (checkWinner(r, c)) {
+
+        if (checkWinner(r, c)) { //if winner exists, call endgame
             endGame();
         }
         player1 = !player1;
@@ -39,7 +39,6 @@ cellClick.forEach((item, index) => {
 
 // check for winner
 function checkWinner(r, c) {
-    console.log('hi');
     let winner = true;
     let curr = grid[r][c];
     let winningCells = [];
@@ -103,10 +102,9 @@ function highlightWinner(winningCells) {
     winningCells.forEach(helper);
 
     function helper(winningIndex, i, winningCells) {
-        console.log(winningIndex);
         cellClick.forEach((cell, j) => {
             if (winningIndex == j) {
-                
+                cell.className = "winningCell";
             }
         })
     }
@@ -114,7 +112,19 @@ function highlightWinner(winningCells) {
 
 // end game
 function endGame() {
-    window.location.href = "../content/winner.html";
+    // change heading to display winner
+    if (player1)
+        gameHeading.textContent = "Player 1 wins!";
+    else 
+        gameHeading.textContent = "Player 2 wins!";
+
+    // display "Play again" button
+    playAgainClick.classList.remove("inactive");
+
+    // disable other cells
+    cellClick.forEach((item, index) => {
+        item.disabled = true;
+    })
 }
 
 // play again

@@ -12,3 +12,11 @@
     height: 75px;
     font-size: xx-large;
 }
+
+.winningCell {
+    width: 75px;
+    height: 75px;
+    font-size: xx-large;
+    border-color: #49A249;
+    background-color: #99D399;
+}
