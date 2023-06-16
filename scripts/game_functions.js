@@ -1,6 +1,7 @@
 'use strict';
 
 let player1 = true;
+let cellsFilled = 0;
 let grid = [
     ['.','.','.'], 
     ['.','.','.'], 
@@ -29,10 +30,12 @@ cellClick.forEach((item, index) => {
             grid[r][c] = 'O';
             gameHeading.textContent = "Player 1's turn!";
         }
+        
+        cellsFilled++;
+        checkWinner(r, c); // check if there is winner
+        if (cellsFilled == 9)
+            endGame(false);
 
-        if (checkWinner(r, c)) { //if winner exists, call endgame
-            endGame();
-        }
         player1 = !player1;
     });
 })
@@ -51,7 +54,6 @@ function checkWinner(r, c) {
     }
     if (winner) {
         highlightWinner(winningCells);
-        return winner;
     }
 
     winner = true;
@@ -64,7 +66,6 @@ function checkWinner(r, c) {
     }
     if (winner) {
         highlightWinner(winningCells);
-        return winner;
     }
 
     winner = true;
@@ -77,7 +78,6 @@ function checkWinner(r, c) {
     }
     if (winner) {
         highlightWinner(winningCells);
-        return winner;
     }
 
     winner = true;
@@ -91,7 +91,6 @@ function checkWinner(r, c) {
     }
     if (winner) {
         highlightWinner(winningCells);
-        return winner;
     }
 
     return false;
@@ -108,15 +107,19 @@ function highlightWinner(winningCells) {
             }
         })
     }
+
+    endGame(true);
 }
 
-// end game
-function endGame() {
+// end game with winner
+function endGame(winnerExists) {
     // change heading to display winner
-    if (player1)
+    if (winnerExists && player1)
         gameHeading.textContent = "Player 1 wins!";
-    else 
+    else if (winnerExists && !player1)
         gameHeading.textContent = "Player 2 wins!";
+    else
+        gameHeading.textContent = "Tie!";
 
     // display "Play again" button
     playAgainClick.classList.remove("inactive");
