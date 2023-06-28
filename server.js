@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const PORT = 8080;
 
-fs.readFile('./index.html', function (err, html) {
+fs.readFile('/content/index.html', function (err, html) {
     if (err) console.log(err);
 
     http.createServer(function(req, resp) {
