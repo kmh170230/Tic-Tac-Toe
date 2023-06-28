@@ -132,5 +132,5 @@ function endGame(winnerExists) {
 
 // play again
 playAgainClick.addEventListener('click', function() {
-    window.location.href = "../content/board.html";
+    window.location.href = "../content/index.html";
 });
